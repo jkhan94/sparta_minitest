@@ -1,1 +1,0 @@
-# sparta_mintest
