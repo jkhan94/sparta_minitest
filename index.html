@@ -465,11 +465,14 @@
         },
     });
 
+    // 0:348 Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled and not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters.
+    // 스와이퍼가 안 돼서 경고문을 보니 개수가 적어서 안 돌아간단다.
+    // slidesPerView: 4 -> 3으로 변경하니 돈다.
     var swiper = new Swiper(".bottom_mySwiper", {
         effect: "coverflow",
 
         centeredSlides: true,
-        slidesPerView: 4,
+        slidesPerView: 3,
         spaceBetween: 75,
         autoHeight: true,
         autoplay: { delay: 2500, disableOnInteraction: false },
