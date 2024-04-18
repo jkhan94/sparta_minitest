@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>9해조</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Demo styles -->
+    <style>
+        @font-face {
+            font-family: 'TheJamsil5Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        * {
+            font-family: "TheJamsil5Bold";
+            font-optical-sizing: auto;
+            font-weight: weight;
+            font-style: normal;
+        }
+
+        body {
+            /*몸통, 배경설정*/
+            padding: 0;
+            margin: 0;
+            background-color: black;
+            background-image: url(https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            -ms-overflow-style: none;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .container {
+            /*수정창 (비활성화)'*/
+            visibility: hidden;
+            position: fixed;
+            z-index: 1000;
+            width: 600px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 20px auto 0px auto;
+            background-image: url(https://img.freepik.com/free-photo/silver-metallic-textured-background_53876-90845.jpg?size=626&ext=jpg&ga=GA1.1.553209589.1713225600&semt=ais);
+            border-radius: 30px;
+
+        }
+
+        .container.show {
+            /*수정창 (활성화)'*/
+            visibility: visible;
+        }
+
+
+        body .backblack {
+            /*수정창 생성시 외부의 반투명한 검정 창'(비활성화)*/
+            visibility: hidden;
+            position: fixed;
+            content: "";
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: 70%;
+            z-index: 900;
+        }
+
+        .backblack.show {
+            /*수정창 생성시 외부의 반투명한 검정 창'(활성화)*/
+            visibility: visible;
+        }
+
+
+        .place {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            background: linear-gradient(to bottom, #7b7cb3, #B1B2FF);
+            padding: 10px 0;
+            border-radius: 30px;
+            border-radius: 30px;
+        }
+
+        .placebutton {
+            display: flex;
+            align-items: center;
+            margin-left: 50px;
+        }
+
+        .placebutton>button {
+            opacity: 60%;
+            height: 40px;
+            width: 70px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border: 2px solid #EEF1FF;
+            margin-right: 10px;
+            margin-left: auto;
+        }
+
+        .place>h1 {
+            color: white;
+            margin-left: 50px;
+            font-weight: 100;
+        }
+
+        .first {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo>img {
+            margin-top: 20px;
+            margin-left: 10px;
+            border-radius: 5px;
+        }
+
+        .info {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: right;
+            width: 200px;
+            height: 200px;
+        }
+
+        .info1 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .info2 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 40px;
+        }
+
+        /*입력칸 스타일 변경*/
+        .info1 input,
+        .info2 input {
+            font-size: 20px;
+            width: 90%;
+            padding: 8px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .pos {
+            margin: 20px 0px 30px 0px;
+        }
+        .main_01{
+            transform: translateY(12%);
+        }
+
+        .main_01 .swiper {
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+
+        .main_01 .swiper-slide {
+            /*상단 스와이프 슬라이드 변형*/
+            font-size: 18px;
+            color: #fff;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            transition-duration: 0ms;
+            transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) scale(1);
+            z-index: 1;
+            margin-right: 30px;
+            margin-left: 50px;
+            margin-top: 30px;
+        }
+
+        .main_01 .parallax-bg {
+            /*상단 스와이프 배경이미지*/
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 120%;
+            height: 100%;
+            -webkit-background-size: cover;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .main_01 .swiper-slide .title {
+            /*상단 스와이프 타이틀 글자 '9해조'*/
+            font-size: 110px;
+            font-weight: 500;
+            color: transparent;
+            background-image: linear-gradient(to right top, #99ccff, #cc99ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+
+        .main_01 .swiper-slide .subtitle {
+            /*상단 스와이프 서브 타이틀 글자 '팀소개'*/
+            font-size: 55px;
+        }
+
+        .main_01 .swiper-slide .text {
+            /*상단 스와이프 내부 글자*/
+            font-size: 28px;
+            max-width: 700px;
+            line-height: 1;
+            filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.9));
+        }
+
+        .main_02 {
+            
+            /*하단 스와이프*/
+            margin-top: 150px;
+            position: relative;
+            height: 600px;
+            width: 95%;
+
+        }
+
+        .main_02 .box2 {
+            /* 카드 등록 박스*/
+            transform: translateX(2.5%);
+            position: relative;
+            top: -115%;
+            left: 101%;
+            height: 80%;
+            width: 30%;
+            z-index: 200;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid transparent;
+            box-sizing: border-box;
+            transition: all .4s;
+        }
+
+
+        .main_02 .card_main {
+            /*하단 스와이프 배경색 설정*/
+            position: absolute;
+            width: 78%;
+            height: 90%;
+            background-color: transparent;
+        }
+
+        .main_02 .swiper {
+            /*카드 전체 크기조절*/
+            width: 100%;
+            height: 100%;
+        }
+
+        .main_02 .swiper-slide {
+            /*스와이프 카드 배경값*/
+            text-align: center;
+            font-size: 30px;
+            background: rgb(75, 75, 75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+        }
+
+        .main_02 .swiper-slide img {
+            /*카드 이미지 크기 조절*/
+            display: block;
+            max-width: 300px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 30px;
+        }
+
+        .main_02 .swiper-slide div {
+            /*카드의 글자 크기조절*/
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            height: 20%;
+            color: black;
+            text-shadow:
+                -1px -1px 0 white,
+                1px -1px 0 white,
+                -1px 1px 0 white,
+                1px 1px 0 white;
+        }
+
+
+        .main_02 .popup {
+            /*카드의 버튼 크기조절*/
+            position: absolute;
+            bottom: 20px;
+            border: 2px solid white;
+            background-color: gray;
+            padding: 5px 50px;
+            color: white;
+            font-size: 15px;
+            opacity: 50%;
+            border-radius: 10px;
+        }
+
+        .nextmap>div {
+            /* 카드 신규등록의 항목 크기조절*/
+            display: inline-block;
+            height: 80px;
+            width: 300px;
+        }
+
+        .nextmap>div input {
+            font-size: 12px;
+            color: black;
+            width: 70%;
+            padding: 8px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .nextmap>div>button {
+            border: 2px solid white;
+            background-image: linear-gradient(to bottom, #7b7cb3, #B1B2FF);
+            padding: 5px 50px;
+            color: #692c69;
+            font-size: 20px;
+            border-radius: 10px;
+            height: 50px;
+        }
+
+        /* 영역구분 이미지*/
+        .dividing_image {
+            position: relative;
+            z-index: 400;
+            margin-top: 360px;
+            margin-right: -80px;
+            transform: scale(1.2);
+        }
+
+        .rounded-image {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 메인 상세페이지 -->
+    <div class="container" id="container">
+        <div class="place">
+            <h1>팀원소개</h1>
+            <div class="placebutton">
+                <button id="updatebtn" style="margin-left: 210px;">수정</button>
+                <button id="deletebtn">삭제</button>
+            </div>
+        </div>
+        <div class="container2" id="container2"></div>
+    </div>
+
+    <div class="backblack"> <!-- 수정장 뒤의 검은 창 -->
+    </div>
+
+    <!-- 매인 상단 -->
+    <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="main_01 swiper top_mySwiper">
+        <div class="parallax-bg" style="
+              background-image: url(https://blog.kakaocdn.net/dn/qwCgZ/btsGG57DYIP/KUDlPSdr8TsGNkJkQT8Mlk/top%20slider.png?attach=1&knm=img.png); 
+              background-color:transparent;
+            " data-swiper-parallax="-23%"></div>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="title" data-swiper-parallax="-300">9해조</div>
+                <div class="subtitle" data-swiper-parallax="-200"></div>
+                <div class="text" data-swiper-parallax="-100">
+                    <p>
+                        모두 "I" 로 구성된 백엔드 개발자 지망생들
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="swiper-slide" style="margin-left: 45%;">
+                <div class="subtitle" data-swiper-parallax="-200">팀목표</div>
+                <div class="text" data-swiper-parallax="-100">
+                    <p>
+                    <div style="font-weight: 200; color: #dbdbdb; line-height: 30px;">
+                        <li>- github으로 협업 연습</li>
+                        <li>- 잔디 많이 키우기</li>
+                        <li>- 서로 서로 모르는 거 물어보고 답해주기</li>
+                        <li>- 존중해주고 이쁜 말로 의견 내기</li>
+                    </div>
+                    </p>
+                </div>
+            </div>
+
+            <div class="swiper-button-next" style="margin-right:30px;">
+                <div style="color: gray;">MISSION</div>
+            </div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+
+    <!-- 매인 하단 -->
+    <section class="main_02">
+        <section class="card_main">
+            <div class="swiper bottom_mySwiper">
+                <div class="swiper-wrapper" id="swipe_card">
+                    <!-- 이 위치에 카드생성됨 -->
+                </div>
+            </div>
+            <div class="box2">
+                <!--경계 나누는 이미지 =우주인-->
+                <div class="dividing_image">
+                    <img src="https://blog.kakaocdn.net/dn/cRErQZ/btsGGYAKyZr/YcHKakkwNjmIsuVwYMHw70/astronaut.png?attach=1&knm=img.png"
+                        width="200px">
+                </div>
+                <div class="nextmap">
+                    <div><!-- 카드 신규 등록 -->
+                        <input type="text" id="photo_n" placeholder="이미지URL">
+                        <input type="text" id="name_n" placeholder="이름">
+                        <input type="text" id="birthday_n" placeholder="생년월일">
+                        <input type="text" id="mbti_n" placeholder="MBTI">
+                        <input type="text" id="strengths_n" placeholder="장점">
+                        <input type="text" id="collaborationStyle_n" placeholder="협업스타일">
+                        <input type="text" id="blogURL_n" placeholder="블로그주소">
+                        <br>
+                        <button id="new_btn">탑승하기</button><!-- 버튼 선택시 변경됨 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</body>
+
+<!-- 프로필 스와이퍼 스크립트-->
+<script>
+    var swiper = new Swiper(".top_mySwiper", {
+        speed: 600,
+        parallax: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    // 0:348 Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled and not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters.
+    // 스와이퍼가 안 돼서 경고문을 보니 개수가 적어서 안 돌아간단다.
+    // slidesPerView: 4 -> 3으로 변경하니 돈다.
+    var swiper = new Swiper(".bottom_mySwiper", {
+        effect: "coverflow",
+
+        centeredSlides: true,
+        slidesPerView: 3,
+        spaceBetween: 75,
+        autoHeight: true,
+        autoplay: { delay: 2500, disableOnInteraction: false },
+        coverflowEffect: {
+            rotate: 20,
+            stretch: 20,
+            depth: 10,
+            modifier: 1,
+            slideShadows: false,
+        },
+        slidesOffsetBefore: 3,
+        loop: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+
+    });
+</script>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { collection, doc, getDocs, getFirestore, query, setDoc, updateDoc, where, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyCXk7T2TbT4ja4Xs6JTGiYBqwEdaGDRyZg",
+        authDomain: "miniteamwebsite.firebaseapp.com",
+        projectId: "miniteamwebsite",
+        storageBucket: "miniteamwebsite.appspot.com",
+        messagingSenderId: "932241178765",
+        appId: "1:932241178765:web:add7a2d24be400fb15e2c4",
+        measurementId: "G-HHKFJGGTNY"
+    };
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+
+
+    // 드롭박스 선택 시 수정화면 띄움.
+
+    // 스냅샷과 쿼리로 문서 출력.
+    async function fetchByIndex(e) {
+        const q = query(collection(db, "teamMembers"), where("index", "==", e));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            let row = doc.data();
+
+            let photo = row['photo']
+            let name = row['name']
+            let birthday = row['birthday']
+            let mbti = row['mbti']
+            let strengths = row['strengths']
+            let collaborationStyle = row['collaborationStyle']
+            let blogURL = row['blogURL']
+            let index = row['index']
+
+            /*수정창 생성*/
+            let temp_html = `
+       <div class="box">
+           <div class="first">
+               <div class="photo">
+                   <img id="photo" class="rounded-image" src="${photo}" alt="사진" height="300px" max-width="200" >
+               </div>
+               <div class="info">
+                   <div class="info1"><input type="text" id="changePhoto" value="${photo}"placeholder="이미지URL"> <span id="ph"></span></div>
+                   <div class="info1"><input type="text" id="name" value="${name}" placeholder="이름"> <span id="ph"></span></div>
+                   <div class="info1"><input type="text" id="birthday" value="${birthday}" placeholder="생년월일"><span id="time"></span></div>
+                   <div class="info1"><input type="text" id="mbti" value="${mbti}" placeholder="MBTI"><span id="scores"></span></div>
+               </div>
+           </div>
+       </div>
+       <div class="character">
+           <div class="info2"><input type="text" id="strengths" value="${strengths}" placeholder="장점"></div>
+           <div class="info2"><input type="text" id="collaborationStyle" value="${collaborationStyle}" placeholder="협업스타일"></div>
+           <div class="info2"><input type="text" id="blogURL" value="${blogURL}" placeholder="블로그주소"></div>
+           <div class="info2"><input type="hidden" id="index" value="${index}" placeholder="index"></div>
+       </div>`
+            $('#container2').empty();
+            $('#container2').append(temp_html);
+        });
+    }
+
+    // 카드 수정
+    // document.getElementById('updatebtn').addEventListener('click', async () => {
+    $('#updatebtn').click(async function () {
+        let photo = $('#changePhoto').val();
+        let name = $('#name').val();
+        let birthday = $('#birthday').val();
+        let mbti = $('#mbti').val();
+        let strengths = $('#strengths').val();
+        let collaborationStyle = $('#collaborationStyle').val();
+        let blogURL = $('#blogURL').val();
+        let index = $('#index').val();
+
+        console.log(photo)
+
+        let up = {
+            photo: photo,
+            name: name,
+            birthday: birthday,
+            mbti: mbti,
+            strengths: strengths,
+            collaborationStyle: collaborationStyle,
+            blogURL: blogURL,
+            index: index
+        };
+        console.log(up)
+        const updateID = doc(db, "teamMembers", index);
+        await updateDoc(updateID, up);
+
+        alert("수정했습니다!");
+        window.location.reload();
+    });
+
+    // 카드 삭제
+    document.getElementById('deletebtn').addEventListener('click', async () => {
+        let index = $('#index').val();
+        console.log(index)
+        let result = confirm("삭제하시겠습니까?");
+        if (result) {
+            await deleteDoc(doc(db, "teamMembers", index));
+            alert("삭제했습니다!");
+            window.location.reload();
+        }
+    });
+
+    // 카드 가져오기(읽기)
+    async function fetchData() {
+        const querySnapshot = await getDocs(collection(db, "teamMembers"));
+        querySnapshot.forEach((doc) => {
+            const row = doc.data();
+
+            let photo = row['photo']
+            let name = row['name']
+            let birthday = row['birthday']
+            let mbti = row['mbti']
+            let strengths = row['strengths']
+            let collaborationStyle = row['collaborationStyle']
+            let blogURL = row['blogURL']
+            let index = row['index']
+
+            const card = `
+            <div class="swiper-slide" id="swipe_card">
+                <img src="${photo}" alt="">
+                <div>${name}</div>
+                <button id="${index}" class="popup">View</button>
+            </div>`;
+            $('#swipe_card').prepend(card);
+
+            // popup 버튼 이벤트 핸들러
+            $('.bottom_mySwiper .popup').click(function () {
+                const selectIndex = $(this).attr('id');// 카드의 버튼 선택시 수정창 꺼냄
+                console.log(selectIndex);
+                fetchByIndex(selectIndex);
+                $('#' + selectIndex).click();
+
+                $('.container').addClass('show')// 카드 수정창 보임
+                $('.backblack').addClass('show')
+            });
+        });
+
+        // 백그라운드 클릭 시 이벤트 핸들러
+        $('.backblack').click(function () {
+            $('.container').removeClass('show') // 카드 수정창 숨김
+            $('.backblack').removeClass('show')
+        });
+    }
+
+
+
+
+
+
+
+    // 생성(회원 등록)
+    $('#new_btn').click(async function () {
+        // 사진등록이 없을 경우, 특정 초기값 이미지URL이 등록
+        let photo = $('#photo_n').val() || 'https://cdn3d.iconscout.com/3d/premium/thumb/astronaut-riding-on-rocket-5815114-4873864.png';
+        let name = $('#name_n').val();
+        let birthday = $('#birthday_n').val();
+        let mbti = $('#mbti_n').val();
+        let strengths = $('#strengths_n').val();
+        let collaborationStyle = $('#collaborationStyle_n').val();
+        let blogURL = $('#blogURL_n').val();
+        let index = String(Date.now() + Math.random())
+
+        let up = {
+            photo: photo,
+            name: name,
+            birthday: birthday,
+            mbti: mbti,
+            strengths: strengths,
+            collaborationStyle: collaborationStyle,
+            blogURL: blogURL,
+            index: index
+        };
+
+        await setDoc(doc(db, "teamMembers", index), up);
+
+        alert("가입했습니다!");
+
+        window.location.reload();
+
+
+    });
+
+    fetchData();// 함수 실행
+</script>
+
+</html>
